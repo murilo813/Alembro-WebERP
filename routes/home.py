@@ -1,7 +1,5 @@
-from flask import Blueprint, session, flash, redirect, render_template, request, jsonify
+from flask import Blueprint, session, render_template
 from functions import criar_conexao, obter_notificacoes, liberar_conexao, login_required
-from datetime import date
-from psycopg2.extras import RealDictCursor
 
 home_bp = Blueprint('home', __name__)
 

@@ -1,10 +1,5 @@
-from flask import Flask, Blueprint, render_template, request, redirect, session, flash, jsonify
-from markupsafe import Markup
+from flask import Blueprint, render_template, request, redirect, session, flash, jsonify
 from datetime import date
-from psycopg2 import connect, sql
-from psycopg2.extras import RealDictCursor
-import psycopg2
-import json
 from functions import carregar_atendimentos, criar_conexao, obter_notificacoes, login_required, liberar_conexao
 
 financeiro_bp = Blueprint('financeiro', __name__)

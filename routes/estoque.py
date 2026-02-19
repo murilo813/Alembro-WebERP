@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, flash, redirect
+from flask import Blueprint, render_template, session, flash, redirect
 from functions import criar_conexao, obter_notificacoes, liberar_conexao, login_required
 
 estoque_bp = Blueprint('estoque', __name__)

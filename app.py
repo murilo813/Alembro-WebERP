@@ -1,14 +1,14 @@
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, flash, redirect, url_for
 from config import Config
 from datetime import timedelta
 from dotenv import load_dotenv
-import os
 from extensions import limiter
+import os
 
 load_dotenv()
 
 app = Flask(__name__)
-app.config.from_object(Config)
+app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 app.permanent_session_lifetime = timedelta(days=7)
 
 app.config.update(

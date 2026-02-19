@@ -1,18 +1,33 @@
-import psycopg2
-from psycopg2 import pool
-from flask import g, session, redirect, url_for, flash
+from flask import session, redirect, url_for, flash, render_template
 from psycopg2.extras import RealDictCursor
 import os
 from datetime import date
+from psycopg2 import pool
 from functools import wraps
 
-connection_pool = pool.SimpleConnectionPool(
-    1, 20,
-    host=os.getenv('DB_HOST'),
-    database=os.getenv('DB_NAME'),
-    user=os.getenv('DB_USER'),
-    password=os.getenv('DB_PASSWORD')
-)
+os.environ['PYTHONUTF8'] = '1'
+for key in ['PGPASSFILE', 'PGSERVICEFILE', 'PGHOSTADDR', 'PGUSER', 'PGDATABASE', 'PGPASSWORD', 'PGHOST']:
+    os.environ.pop(key, None)
+
+db_host = os.getenv('DB_HOST').strip()
+db_port = os.getenv('DB_PORT').strip()
+db_name = os.getenv('DB_NAME').strip()
+db_user = os.getenv('DB_USER').strip()
+db_pass = os.getenv('DB_PASSWORD').strip()
+
+try:
+    connection_pool = pool.SimpleConnectionPool(
+        1, 20,
+        host=db_host,
+        port=db_port,
+        database=db_name,
+        user=db_user,
+        password=db_pass,
+        client_encoding='utf8'
+    )
+    print("✅ POOL DE CONEXÕES INICIALIZADO")
+except Exception as e:
+    print(f"❌ ERRO AO CRIAR POOL: {e}")
 
 def criar_conexao():
     return connection_pool.getconn()

@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template, request, session, flash, redirect
 from functions import criar_conexao, obter_notificacoes, liberar_conexao, login_required, obter_gastos
 from datetime import datetime
-import psycopg2
-import os
 
 gastos_bp = Blueprint('gastos', __name__)
 

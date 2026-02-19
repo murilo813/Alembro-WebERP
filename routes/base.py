@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, flash, redirect, jsonify
+from flask import Blueprint, request, session, jsonify
 from functions import criar_conexao, liberar_conexao, login_required
 from datetime import date
 
